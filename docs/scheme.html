@@ -1,0 +1,88 @@
+<meta charset="utf-8">
+<style>
+  html,body{margin:0;padding:0;background:#fff}
+  svg{display:block}
+  .t{font-family:Arial,Helvetica,sans-serif;fill:#1a1a1a}
+  .title{font-size:26px;font-weight:700}
+  .sub{font-size:15px;fill:#666}
+  .box{fill:#fff;stroke:#1a1a1a;stroke-width:2;rx:8}
+  .boxy{fill:#fffbe6;stroke:#c9a227;stroke-width:2;rx:8}
+  .boxn{fill:#f4f6f8;stroke:#98a2ad;stroke-width:1.5;rx:8}
+  .zone{fill:none;stroke:#98a2ad;stroke-width:1.5;stroke-dasharray:7 6;rx:10}
+  .h{font-size:17px;font-weight:700}
+  .p{font-size:14px;fill:#3c3c3c}
+  .lbl{font-size:13px;fill:#3c3c3c}
+  .mono{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:12.5px;fill:#3c3c3c}
+  .ln{stroke:#1a1a1a;stroke-width:2;fill:none}
+  .dash{stroke:#c9a227;stroke-width:2;fill:none;stroke-dasharray:6 5}
+  .note{font-size:13.5px;fill:#3c3c3c}
+</style>
+<svg width="1420" height="820" viewBox="0 0 1420 820" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 z" fill="#1a1a1a"/>
+    </marker>
+    <marker id="ay" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 z" fill="#c9a227"/>
+    </marker>
+  </defs>
+
+  <text class="t title" x="40" y="48">Схема взаимодействия приложения с API Яндекс Директа</text>
+  <text class="t sub" x="40" y="76">Внутреннее приложение для собственного рекламного аккаунта. Работает на компьютере оператора; собственных серверов и промежуточных сервисов нет.</text>
+
+  <rect class="zone" x="40" y="110" width="660" height="560"/>
+  <text class="t lbl" x="60" y="136" font-weight="700">Рабочее место оператора (локально)</text>
+
+  <rect class="box" x="80" y="160" width="580" height="70"/>
+  <text class="t h" x="104" y="190">Оператор — специалист по рекламе</text>
+  <text class="t p" x="104" y="213">ставит задачу и подтверждает изменения в аккаунте</text>
+
+  <rect class="box" x="80" y="300" width="580" height="86"/>
+  <text class="t h" x="104" y="330">AI-ассистент в среде разработки</text>
+  <text class="t p" x="104" y="353">переводит задачу в конкретные вызовы API,</text>
+  <text class="t p" x="104" y="373">разбирает ответ и готовит сводку</text>
+
+  <rect class="box" x="80" y="452" width="580" height="104"/>
+  <text class="t h" x="104" y="482">MCP-модуль приложения (Node.js)</text>
+  <text class="t p" x="104" y="505">хранит токен, формирует тело запроса,</text>
+  <text class="t p" x="104" y="525">ждёт готовности отчётов, считает расход баллов (Units),</text>
+  <text class="t p" x="104" y="545">режим «только чтение» блокирует изменяющие методы</text>
+
+  <rect class="boxn" x="80" y="590" width="580" height="56"/>
+  <text class="t p" x="104" y="614">OAuth-токен хранится локально, файл с правами 600:</text>
+  <text class="t mono" x="104" y="634">~/.config/yandex-direct/token</text>
+
+  <rect class="boxy" x="900" y="160" width="440" height="70"/>
+  <text class="t h" x="924" y="190">Яндекс OAuth</text>
+  <text class="t mono" x="924" y="213">oauth.yandex.ru — scope direct:api</text>
+
+  <rect class="box" x="900" y="452" width="440" height="104"/>
+  <text class="t h" x="924" y="482">API Яндекс Директа v5</text>
+  <text class="t mono" x="924" y="505">api.direct.yandex.com/json/v5/{service}</text>
+  <text class="t p" x="924" y="528">campaigns, adgroups, ads, keywords,</text>
+  <text class="t p" x="924" y="548">bids, dictionaries, reports</text>
+
+  <path class="ln" d="M370,230 L370,296" marker-end="url(#a)"/>
+  <text class="t lbl" x="386" y="268">задача обычным текстом</text>
+
+  <path class="ln" d="M370,386 L370,448" marker-end="url(#a)"/>
+  <text class="t lbl" x="386" y="408">вызов инструмента: получение данных</text>
+  <text class="t lbl" x="386" y="428">или изменение — после подтверждения</text>
+
+  <path class="ln" d="M660,480 L896,480" marker-end="url(#a)"/>
+  <text class="t mono" x="714" y="450">POST /json/v5/{service}</text>
+  <text class="t lbl" x="714" y="468">Authorization: Bearer</text>
+
+  <path class="ln" d="M896,528 L664,528" marker-end="url(#a)"/>
+  <text class="t lbl" x="714" y="552">JSON-результат</text>
+  <text class="t lbl" x="714" y="570">или TSV-отчёт</text>
+
+  <path class="dash" d="M1340,195 L1380,195 L1380,618 L664,618" marker-end="url(#ay)"/>
+  <text class="t lbl" x="924" y="320" fill="#8a6d1a">разовый шаг: пользователь сам выдаёт</text>
+  <text class="t lbl" x="924" y="342" fill="#8a6d1a">приложению OAuth-токен и в любой момент</text>
+  <text class="t lbl" x="924" y="364" fill="#8a6d1a">может его отозвать</text>
+
+  <text class="t note" x="40" y="712">• Приложение обращается только к api.direct.yandex.com. Данные рекламного аккаунта не передаются в сторонние сервисы и не покидают компьютер оператора.</text>
+  <text class="t note" x="40" y="740">• Изменяющие методы (add, update, delete, suspend, resume) выполняются пооперационно, по явному подтверждению оператора; предусмотрен режим «только чтение».</text>
+  <text class="t note" x="40" y="768">• Соблюдаются ограничения API: постраничная выборка через LimitOffset, контроль остатка баллов по заголовку Units, повторные запросы отчёта по коду 201/202.</text>
+</svg>

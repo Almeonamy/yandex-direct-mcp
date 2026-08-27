@@ -1,0 +1,14 @@
+{
+  "name": "yandex-direct-mcp",
+  "version": "0.1.0",
+  "description": "MCP-сервер для Яндекс Директ API v5: отчёты и управление кампаниями из AI-агента",
+  "main": "server.js",
+  "bin": { "yandex-direct-mcp": "server.js" },
+  "scripts": {
+    "check": "node --check server.js && bash -n save-token.sh"
+  },
+  "engines": { "node": ">=18" },
+  "keywords": ["mcp", "model-context-protocol", "yandex", "yandex-direct", "ads", "ppc", "claude"],
+  "license": "MIT",
+  "files": ["server.js", "save-token.sh", "AGENTS.md", "docs"]
+}
