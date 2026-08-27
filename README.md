@@ -36,7 +36,7 @@ MCP-сервер для **Яндекс Директ API v5**. Подключае
 ## Установка
 
 ```bash
-git clone https://github.com/<owner>/yandex-direct-mcp.git
+git clone https://github.com/iarbor04/yandex-direct-mcp.git
 cd yandex-direct-mcp
 ```
 
